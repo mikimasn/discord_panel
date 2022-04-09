@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="define.css">
+
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script src="panel.js"></script>
+            <script>
+                var load=false;
+                var ids = [];
+                var id=0;
+            $(document).ready(function(){
+                
+                function serverlook()
+                {
+                    $.post('checkbot.php', {type:"0",id:"0"}, function(data){
+                        if(data!="0")
+                        {
+                            location.replace("guild/"+data)
+                        }
+                    })
+                    
+                }
+                setInterval(serverlook,100,null);
+                function main()
+                {
+                    if(load)
+                    {
+                     clearInterval(chackin);   
+                $.post('checkbot.php', {id:ids[id]}, function(data){
+                    if(data==0)
+                    {
+                        var elemente = document.getElementById(ids[id]);
+                        elemente.className="not_bot";
+                        elemente.disable = false;
+                        elemente.value = 'Add bot';
+                        var href = document.getElementById(ids[id]+"-h");
+                        href.style = null
+                        href.href="https://discord.com/oauth2/authorize?scope=bot&response_type=code&permissions=1916267615&client_id=812759298354446366&redirect_uri=http%3A%2F%2Flocalhost%2Fdiscord_panel%2Fcheckbot.php%2F&guild_id="+ids[id]
+                        href.setAttribute('onclick',"window.open('https://discord.com/oauth2/authorize?scope=bot&response_type=code&permissions=1916267615&redirect_uri=http%3A%2F%2Flocalhost%2Fdiscord_panel%2Fcheckbot.php%2F&client_id=812759298354446366&guild_id="+ids[id]+"', 'nazwa', 'menubar=no,toolbar=no,location=no,directories=no,status=no,scrollbars=no,resizable=no,fullscreen=no,channelmode=no,width=600,height=900').focus(); return false;serverlook();")
+                        id++;
+                        
+                    }
+                    else
+                    {
+                        
+                        var href = document.getElementById(ids[id]+"-h");
+                        href.style = null;
+                        var elemente = document.getElementById(ids[id]);
+                        elemente.className="ba";
+                        elemente.disable = false;
+                        elemente.value = 'Open panel';
+                        id++;
+                    }
+                    if(id==ids["length"])
+                    {
+                        id=0;
+                    }
+                        main();
+                });
+                }
+            }
+                var chackin = setInterval(main,100,null)
+            });
+            
+            </script>
+    </head>
+    <body>
+        <div id="head"><div id="head-text-div"><h1 id="head_text">Codedic</h1></div><div id="profile_panel" ><div id="photo"></div></div></div>
+        <div id="body"><div id="servers"><div class="server-list-2"><div class="server-profile" style="background: url(https://cdn.discordapp.com/embed/avatars/0.png) 0% 0% / 64px no-repeat;"></div><br><div class="io_server"><p>'.htmlspecialchars($g_name,ENT_QUOTES).'</p><a href="guild/32984080"><input type="button" value="xd" class="ba"></a></div></div></div>
+    </body>
+</html>

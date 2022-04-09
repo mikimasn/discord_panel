@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="define.css">
+
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script>
+                var test=true;
+            $(document).ready(function(){
+                function main()
+                {
+                    if(test)
+                    {
+                $.post('testlogin.php', null, function(data){
+                    if(data==0)
+                    {
+                        location.reload()
+                        test=false
+                    }
+                });
+                }
+            }
+                setInterval(main,100,null)
+            });
+            
+            </script>
+    </head>
+    <body>
+        <div id="head"><div id="head-text-div"><h1 id="head_text">Zaloguj się żeby uzyskać dostęp do panelu</h1></div><div id="buttons"><a target="login"href="https://discord.com/oauth2/authorize?client_id=812759298354446366&redirect_uri=http%3A%2F%2Flocalhost%2Fdiscord_panel%2Flogin.php%2F&response_type=code&scope=identify%20email%20guilds" onclick="window.open('https://discord.com/oauth2/authorize?client_id=812759298354446366&redirect_uri=http%3A%2F%2Flocalhost%2Fdiscord_panel%2Flogin.php%2F&response_type=code&scope=identify%20email%20guilds', 'nazwa', 'menubar=no,toolbar=no,location=no,directories=no,status=no,scrollbars=no,resizable=no,fullscreen=no,channelmode=no,width=600,height=900').focus(); return false"><button id="right_button">Login</button></a></a></div></div>
+    </body>
+</html>
